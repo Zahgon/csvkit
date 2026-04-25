@@ -8,10 +8,7 @@ from csvkit.cli import CSVKitUtility, parse_column_identifiers
 def ignore_case_sort(key):
 
     def inner(row):
-        return tuple(
-            agate.NullOrder() if row[n] is None else (row[n].upper() if isinstance(row[n], str) else row[n])
-            for n in key
-        )
+        pass
 
     return inner
 
@@ -20,27 +17,7 @@ class CSVSort(CSVKitUtility):
     description = 'Sort CSV files. Like the Unix "sort" command, but for tabular data.'
 
     def add_arguments(self):
-        self.argparser.add_argument(
-            '-n', '--names', dest='names_only', action='store_true',
-            help='Display column names and indices from the input CSV and exit.')
-        self.argparser.add_argument(
-            '-c', '--columns', dest='columns',
-            help='A comma-separated list of column indices, names or ranges to sort by, e.g. "1,id,3-5". '
-                 'Defaults to all columns.')
-        self.argparser.add_argument(
-            '-r', '--reverse', dest='reverse', action='store_true',
-            help='Sort in descending order.')
-        self.argparser.add_argument(
-            '-i', '--ignore-case', dest='ignore_case', action='store_true',
-            help='Perform case-independent sorting.')
-        self.argparser.add_argument(
-            '-y', '--snifflimit', dest='sniff_limit', type=int, default=1024,
-            help='Limit CSV dialect sniffing to the specified number of bytes. '
-                 'Specify "0" to disable sniffing entirely, or "-1" to sniff the entire file.')
-        self.argparser.add_argument(
-            '-I', '--no-inference', dest='no_inference', action='store_true',
-            help='Disable type inference (and --locale, --date-format, --datetime-format, --no-leading-zeroes) '
-                 'when parsing the input.')
+        pass
 
     def main(self):
         if self.args.names_only:

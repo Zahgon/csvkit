@@ -26,44 +26,7 @@ class In2CSV(CSVKitUtility):
     override_flags = ['f']
 
     def add_arguments(self):
-        self.argparser.add_argument(
-            metavar='FILE', nargs='?', dest='input_path',
-            help='The CSV file to operate on. If omitted, will accept input as piped data via STDIN.')
-        self.argparser.add_argument(
-            '-f', '--format', dest='filetype', choices=SUPPORTED_FORMATS,
-            help='The format of the input file. If not specified will be inferred from the file type.')
-        self.argparser.add_argument(
-            '-s', '--schema', dest='schema',
-            help='Specify a CSV-formatted schema file for converting fixed-width files. See web documentation.')
-        self.argparser.add_argument(
-            '-k', '--key', dest='key',
-            help='Specify a top-level key to look within for a list of objects to be converted when processing JSON.')
-        self.argparser.add_argument(
-            '-n', '--names', dest='names_only', action='store_true',
-            help='Display sheet names from the input Excel file.')
-        self.argparser.add_argument(
-            '--sheet', dest='sheet',
-            help='The name of the Excel sheet to operate on.')
-        self.argparser.add_argument(
-            '--write-sheets', dest='write_sheets',
-            help='The names of the Excel sheets to write to files, or "-" to write all sheets.')
-        self.argparser.add_argument(
-            '--use-sheet-names', dest='use_sheet_names', action='store_true',
-            help='Use the sheet names as file names when --write-sheets is set.')
-        self.argparser.add_argument(
-            '--reset-dimensions', dest='reset_dimensions', action='store_true', default=None,
-            help='Ignore the sheet dimensions provided by the XLSX file.')
-        self.argparser.add_argument(
-            '--encoding-xls', dest='encoding_xls',
-            help='Specify the encoding of the input XLS file.')
-        self.argparser.add_argument(
-            '-y', '--snifflimit', dest='sniff_limit', type=int, default=1024,
-            help='Limit CSV dialect sniffing to the specified number of bytes. '
-                 'Specify "0" to disable sniffing entirely, or "-1" to sniff the entire file.')
-        self.argparser.add_argument(
-            '-I', '--no-inference', dest='no_inference', action='store_true',
-            help='Disable type inference (and --locale, --date-format, --datetime-format, --no-leading-zeroes) '
-                 'when parsing CSV input.')
+        pass
 
     # This is called only from open_excel_input_file(), but is a separate method to use caching.
     @functools.lru_cache

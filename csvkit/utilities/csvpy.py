@@ -13,23 +13,7 @@ class CSVPy(CSVKitUtility):
     override_flags = ['l', 'zero', 'add-bom']
 
     def add_arguments(self):
-        self.argparser.add_argument(
-            '--dict', dest='as_dict', action='store_true',
-            help='Load the CSV file into a DictReader.')
-        self.argparser.add_argument(
-            '--agate', dest='as_agate', action='store_true',
-            help='Load the CSV file into an agate table.')
-        self.argparser.add_argument(
-            '--no-number-ellipsis', dest='no_number_ellipsis', action='store_true',
-            help='Disable the ellipsis if the max precision is exceeded.')
-        self.argparser.add_argument(
-            '-y', '--snifflimit', dest='sniff_limit', type=int, default=1024,
-            help='Limit CSV dialect sniffing to the specified number of bytes. '
-                 'Specify "0" to disable sniffing entirely, or "-1" to sniff the entire file.')
-        self.argparser.add_argument(
-            '-I', '--no-inference', dest='no_inference', action='store_true',
-            help='Disable type inference (and --locale, --date-format, --datetime-format, --no-leading-zeroes) '
-                 'when parsing the input.')
+        pass
 
     def main(self):
         if self.input_file == sys.stdin:

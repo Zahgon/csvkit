@@ -14,33 +14,7 @@ class CSVJoin(CSVKitUtility):
     override_flags = ['f']
 
     def add_arguments(self):
-        self.argparser.add_argument(
-            metavar='FILE', nargs='*', dest='input_paths', default=['-'],
-            help='The CSV files to operate on. If only one is specified, it will be copied to STDOUT.')
-        self.argparser.add_argument(
-            '-c', '--columns', dest='columns',
-            help='The column name(s) on which to join. Should be either one name (or index) or a comma-separated list '
-                 'with one name (or index) per file, in the same order in which the files were specified. If not '
-                 'specified, the two files will be joined sequentially without matching.')
-        self.argparser.add_argument(
-            '--outer', dest='outer_join', action='store_true',
-            help='Perform a full outer join, rather than the default inner join.')
-        self.argparser.add_argument(
-            '--left', dest='left_join', action='store_true',
-            help='Perform a left outer join, rather than the default inner join. If more than two files are provided '
-                 'this will be executed as a sequence of left outer joins, starting at the left.')
-        self.argparser.add_argument(
-            '--right', dest='right_join', action='store_true',
-            help='Perform a right outer join, rather than the default inner join. If more than two files are provided '
-                 'this will be executed as a sequence of right outer joins, starting at the right.')
-        self.argparser.add_argument(
-            '-y', '--snifflimit', dest='sniff_limit', type=int, default=1024,
-            help='Limit CSV dialect sniffing to the specified number of bytes. '
-                 'Specify "0" to disable sniffing entirely, or "-1" to sniff the entire file.')
-        self.argparser.add_argument(
-            '-I', '--no-inference', dest='no_inference', action='store_true',
-            help='Disable type inference (and --locale, --date-format, --datetime-format, --no-leading-zeroes) '
-                 'when parsing the input.')
+        pass
 
     def main(self):
         if isatty(sys.stdin) and self.args.input_paths == ['-']:

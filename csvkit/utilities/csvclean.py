@@ -13,38 +13,7 @@ class CSVClean(CSVKitUtility):
     override_flags = ['L', 'I']
 
     def add_arguments(self):
-        self.argparser.add_argument(
-            '--length-mismatch', dest='length_mismatch', action='store_true',
-            help='Report data rows that are shorter or longer than the header row.')
-        self.argparser.add_argument(
-            '--empty-columns', dest='empty_columns', action='store_true',
-            help='Report empty columns as errors.')
-        self.argparser.add_argument(
-            '-a', '--enable-all-checks', dest='enable_all_checks', action='store_true',
-            help='Enable all error reporting.')
-        self.argparser.add_argument(
-            '--omit-error-rows', dest='omit_error_rows', action='store_true',
-            help='Omit data rows that contain errors, from standard output.')
-        self.argparser.add_argument(
-            '--label', dest='label',
-            help='Add a "label" column to standard error. Useful in automated workflows. '
-                 'Use "-" to default to the input filename.')
-        self.argparser.add_argument(
-            '--header-normalize-space', dest='header_normalize_space', action='store_true',
-            help='Strip leading and trailing whitespace and replace sequences of whitespace characters by a single '
-                 'space in the header.')
-        self.argparser.add_argument(
-            '--join-short-rows', dest='join_short_rows', action='store_true',
-            help='Merges short rows into a single row.')
-        self.argparser.add_argument(
-            '--separator', dest='separator', default='\n',
-            help='The string with which to join short rows. Defaults to a newline.')
-        self.argparser.add_argument(
-            '--fill-short-rows', dest='fill_short_rows', action='store_true',
-            help='Fill short rows with the missing cells.')
-        self.argparser.add_argument(
-            '--fillvalue', dest='fillvalue',
-            help='The value with which to fill short rows. Defaults to none.')
+        pass
 
     def main(self):
         if self.additional_input_expected():

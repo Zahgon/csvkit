@@ -116,23 +116,18 @@ class FixedWidthRowParser:
                 raise ValueError("Error reading schema at line %i: %s" % (i + 2, e))
 
     def parse(self, line):
-        values = []
-
-        for field in self.fields:
-            values.append(line[field.start:field.start + field.length].strip())
-
-        return values
+        pass
 
     def parse_dict(self, line):
         """
         Convenience method returns a dict. Equivalent to
         ``dict(zip(self.headers,self.parse(line)))``.
         """
-        return dict(zip(self.headers, self.parse(line)))
+        pass
 
     @property
     def headers(self):
-        return [field.name for field in self.fields]
+        pass
 
 
 class SchemaDecoder:

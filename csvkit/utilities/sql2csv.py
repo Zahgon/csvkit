@@ -11,45 +11,7 @@ class SQL2CSV(CSVKitUtility):
     override_flags = ['f', 'b', 'd', 'e', 'H', 'I', 'K', 'L', 'p', 'q', 'S', 't', 'u', 'z', 'zero', 'add-bom']
 
     def add_arguments(self):
-        self.argparser.add_argument(
-            '--db', dest='connection_string', default='sqlite://',
-            help='A SQLAlchemy connection string to connect to a database.')
-        self.argparser.add_argument(
-            '--engine-option', dest='engine_option', nargs=2, action='append', default=[],
-            help="A keyword argument to SQLAlchemy's create_engine(), as a space-separated pair. "
-                 "This option can be specified multiple times. For example: thick_mode True")
-        self.argparser.add_argument(
-            '--execution-option', dest='execution_option', nargs=2, action='append',
-            # https://docs.sqlalchemy.org/en/20/core/connections.html#sqlalchemy.engine.Connection.execution_options.params.no_parameters
-            # https://docs.sqlalchemy.org/en/20/core/connections.html#sqlalchemy.engine.Connection.execution_options.params.stream_results
-            # https://docs.sqlalchemy.org/en/20/core/connections.html#using-server-side-cursors-a-k-a-stream-results
-            default=[['no_parameters', True], ['stream_results', True]],
-            help="A keyword argument to SQLAlchemy's execution_options(), as a space-separated pair. "
-                 "This option can be specified multiple times. For example: stream_results True")
-        self.argparser.add_argument(
-            metavar='FILE', nargs='?', dest='input_path',
-            help='The file to use as SQL query. If FILE and --query are omitted, the query is piped data via STDIN.')
-        self.argparser.add_argument(
-            '--query',
-            help="The SQL query to execute. Overrides FILE and STDIN.")
-        self.argparser.add_argument(
-            '-e', '--encoding', dest='encoding', default='utf-8',
-            help='Specify the encoding of the input query file.')
-        self.argparser.add_argument(
-            '-H', '--no-header-row', dest='no_header_row', action='store_true',
-            help='Do not output column names.')
-
-        self.argparser.set_defaults(
-            delimiter=None,
-            doublequote=None,
-            escapechar=None,
-            encoding='utf-8',
-            field_size_limit=None,
-            quotechar=None,
-            quoting=None,
-            skipinitialspace=None,
-            tabs=None,
-        )
+        pass
 
     def main(self):
         if self.additional_input_expected() and not self.args.query:

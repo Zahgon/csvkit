@@ -13,46 +13,7 @@ class CSVJSON(CSVKitUtility):
     description = 'Convert a CSV file into JSON (or GeoJSON).'
 
     def add_arguments(self):
-        self.argparser.add_argument(
-            '-i', '--indent', dest='indent', type=int,
-            help='Indent the output JSON this many spaces. Disabled by default.')
-        self.argparser.add_argument(
-            '-k', '--key', dest='key',
-            help='Output JSON as an object keyed by a given column, KEY, rather than as an array. All column values '
-                 'must be unique. If --lat and --lon are specified, this column is used as the GeoJSON Feature ID.')
-        self.argparser.add_argument(
-            '--lat', dest='lat',
-            help='A column index or name containing a latitude. Output will be GeoJSON instead of JSON. '
-                 'Requires --lon.')
-        self.argparser.add_argument(
-            '--lon', dest='lon',
-            help='A column index or name containing a longitude. Output will be GeoJSON instead of JSON. '
-                 'Requires --lat.')
-        self.argparser.add_argument(
-            '--type', dest='type',
-            help='A column index or name containing a GeoJSON type. Output will be GeoJSON instead of JSON. '
-                 'Requires --lat and --lon.')
-        self.argparser.add_argument(
-            '--geometry', dest='geometry',
-            help='A column index or name containing a GeoJSON geometry. Output will be GeoJSON instead of JSON. '
-                 'Requires --lat and --lon.')
-        self.argparser.add_argument(
-            '--crs', dest='crs',
-            help='A coordinate reference system string to be included with GeoJSON output. Requires --lat and --lon.')
-        self.argparser.add_argument(
-            '--no-bbox', dest='no_bbox', action='store_true',
-            help='Disable the calculation of a bounding box.')
-        self.argparser.add_argument(
-            '--stream', dest='streamOutput', action='store_true',
-            help='Output JSON as a stream of newline-separated objects, rather than an as an array.')
-        self.argparser.add_argument(
-            '-y', '--snifflimit', dest='sniff_limit', type=int, default=1024,
-            help='Limit CSV dialect sniffing to the specified number of bytes. '
-                 'Specify "0" to disable sniffing entirely, or "-1" to sniff the entire file.')
-        self.argparser.add_argument(
-            '-I', '--no-inference', dest='no_inference', action='store_true',
-            help='Disable type inference (and --locale, --date-format, --datetime-format, --no-leading-zeroes) '
-                 'when parsing the input.')
+        pass
 
     def main(self):
         """

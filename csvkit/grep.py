@@ -62,22 +62,7 @@ class FilteringCSVReader:
         raise StopIteration()
 
     def test_row(self, row):
-        for idx, test in self.patterns.items():
-            try:
-                value = row[idx]
-            except IndexError:
-                value = ''
-            result = test(value)
-            if self.any_match:
-                if result:
-                    return not self.inverse  # True
-            else:
-                if not result:
-                    return self.inverse  # False
-
-        if self.any_match:
-            return self.inverse  # False
-        return not self.inverse  # True
+        pass
 
 
 def standardize_patterns(column_names, patterns):
@@ -87,37 +72,12 @@ def standardize_patterns(column_names, patterns):
     If patterns is a dictionary and any of its keys are values in column_names, the returned dictionary will
     have those keys replaced with the integer position of that value in column_names
     """
-    try:
-        # Dictionary of patterns
-        patterns = {k: pattern_as_function(v) for k, v in patterns.items() if v}
-        if not column_names:
-            return patterns
-        p2 = {}
-        for k in patterns:
-            if k in column_names:
-                idx = column_names.index(k)
-                if idx in patterns:
-                    raise ColumnIdentifierError("Column %s has index %i which already has a pattern." % (k, idx))
-                p2[idx] = patterns[k]
-            else:
-                p2[k] = patterns[k]
-        return p2
-    except AttributeError:
-        # Sequence of patterns
-        return {i: pattern_as_function(x) for i, x in enumerate(patterns)}
+    pass
 
 
 def pattern_as_function(obj):
     # obj is function
-    if callable(obj):
-        return obj
-
-    # obj is regex object
-    if hasattr(obj, 'match'):
-        return regex_callable(obj)
-
-    # obj is string
-    return lambda x: obj in x
+    pass
 
 
 class regex_callable:

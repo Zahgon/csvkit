@@ -71,82 +71,7 @@ class CSVStat(CSVKitUtility):
     description = 'Print descriptive statistics for each column in a CSV file.'
 
     def add_arguments(self):
-        self.argparser.add_argument(
-            '--csv', dest='csv_output', action='store_true',
-            help='Output results as a CSV table, rather than plain text.')
-        self.argparser.add_argument(
-            '--json', dest='json_output', action='store_true',
-            help='Output results as JSON text, rather than plain text.')
-        self.argparser.add_argument(
-            '-i', '--indent', dest='indent', type=int,
-            help='Indent the output JSON this many spaces. Disabled by default.')
-        self.argparser.add_argument(
-            '-n', '--names', dest='names_only', action='store_true',
-            help='Display column names and indices from the input CSV and exit.')
-        self.argparser.add_argument(
-            '-c', '--columns', dest='columns',
-            help='A comma-separated list of column indices, names or ranges to be examined, e.g. "1,id,3-5". '
-                 'Defaults to all columns.')
-        self.argparser.add_argument(
-            '--type', dest='type_only', action='store_true',
-            help='Only output data type.')
-        self.argparser.add_argument(
-            '--nulls', dest='nulls_only', action='store_true',
-            help='Only output whether columns contains nulls.')
-        self.argparser.add_argument(
-            '--non-nulls', dest='nonnulls_only', action='store_true',
-            help='Only output counts of non-null values.')
-        self.argparser.add_argument(
-            '--unique', dest='unique_only', action='store_true',
-            help='Only output counts of unique values.')
-        self.argparser.add_argument(
-            '--min', dest='min_only', action='store_true',
-            help='Only output smallest values.')
-        self.argparser.add_argument(
-            '--max', dest='max_only', action='store_true',
-            help='Only output largest values.')
-        self.argparser.add_argument(
-            '--sum', dest='sum_only', action='store_true',
-            help='Only output sums.')
-        self.argparser.add_argument(
-            '--mean', dest='mean_only', action='store_true',
-            help='Only output means.')
-        self.argparser.add_argument(
-            '--median', dest='median_only', action='store_true',
-            help='Only output medians.')
-        self.argparser.add_argument(
-            '--stdev', dest='stdev_only', action='store_true',
-            help='Only output standard deviations.')
-        self.argparser.add_argument(
-            '--len', dest='len_only', action='store_true',
-            help='Only output the length of the longest values.')
-        self.argparser.add_argument(
-            '--max-precision', dest='maxprecision_only', action='store_true',
-            help='Only output the most decimal places.')
-        self.argparser.add_argument(
-            '--freq', dest='freq_only', action='store_true',
-            help='Only output lists of frequent values.')
-        self.argparser.add_argument(
-            '--freq-count', dest='freq_count', type=int,
-            help='The maximum number of frequent values to display.')
-        self.argparser.add_argument(
-            '--count', dest='count_only', action='store_true',
-            help='Only output total row count.')
-        self.argparser.add_argument(
-            '--decimal-format', dest='decimal_format', type=str, default='%.3f',
-            help='%%-format specification for printing decimal numbers. '
-                 'Defaults to locale-specific formatting with "%%.3f".')
-        self.argparser.add_argument(
-            '-G', '--no-grouping-separator', dest='no_grouping_separator', action='store_true',
-            help='Do not use grouping separators in decimal numbers.')
-        self.argparser.add_argument(
-            '-y', '--snifflimit', dest='sniff_limit', type=int, default=1024,
-            help='Limit CSV dialect sniffing to the specified number of bytes. '
-                 'Specify "0" to disable sniffing entirely, or "-1" to sniff the entire file.')
-        self.argparser.add_argument(
-            '-I', '--no-inference', dest='no_inference', action='store_true',
-            help='Disable type inference (and --locale, --date-format, --datetime-format, --no-leading-zeroes) '
-                 'when parsing the input.')
+        pass
 
     def main(self):
         if self.args.names_only:
@@ -369,19 +294,15 @@ def format_decimal(d, f='%.3f', no_grouping_separator=False):
 
 # These are accessed via: globals().get(f'get_{op_name}')
 def get_type(table, column_id, **kwargs):
-    return f'{table.columns[column_id].data_type.__class__.__name__}'
+    pass
 
 
 def get_unique(table, column_id, **kwargs):
-    return len(table.columns[column_id].values_distinct())
+    pass
 
 
 def get_freq(table, column_id, freq_count=5, **kwargs):
-    values = table.columns[column_id].values()
-    return [
-        {'value': r[0], 'count': r[1]}
-        for r in Counter(values).most_common(freq_count)
-    ]
+    pass
 
 
 def launch_new_instance():

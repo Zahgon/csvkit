@@ -64,9 +64,7 @@ class LazyFile:
         return next(self.f).replace('\0', '')
 
     def _open(self):
-        if not self._is_lazy_opened:
-            self.f = self.init(*self._lazy_args, **self._lazy_kwargs)
-            self._is_lazy_opened = True
+        pass
 
 
 class CSVKitUtility:
@@ -163,108 +161,7 @@ class CSVKitUtility:
         whose single-letter form is contained in 'omitflags' will be left out of the configured parser. Use 'f' for
         file.
         """
-        self.argparser = argparse.ArgumentParser(
-            prog=type(self).__name__.lower(), description=self.description, epilog=self.epilog
-        )
-
-        # Input
-        if 'f' not in self.override_flags:
-            self.argparser.add_argument(
-                metavar='FILE', nargs='?', dest='input_path',
-                help='The CSV file to operate on. If omitted, will accept input as piped data via STDIN.')
-        if 'd' not in self.override_flags:
-            self.argparser.add_argument(
-                '-d', '--delimiter', dest='delimiter',
-                help='Delimiting character of the input CSV file.')
-        if 't' not in self.override_flags:
-            self.argparser.add_argument(
-                '-t', '--tabs', dest='tabs', action='store_true',
-                help='Specify that the input CSV file is delimited with tabs. Overrides "-d".')
-        if 'q' not in self.override_flags:
-            self.argparser.add_argument(
-                '-q', '--quotechar', dest='quotechar',
-                help='Character used to quote strings in the input CSV file.')
-        if 'u' not in self.override_flags:
-            self.argparser.add_argument(
-                '-u', '--quoting', dest='quoting', type=int, choices=QUOTING_CHOICES,
-                help='Quoting style used in the input CSV file: 0 quote minimal, 1 quote all, '
-                     '2 quote non-numeric, 3 quote none.')
-        if 'b' not in self.override_flags:
-            self.argparser.add_argument(
-                '-b', '--no-doublequote', dest='doublequote', action='store_false',
-                help='Whether or not double quotes are doubled in the input CSV file.')
-        if 'p' not in self.override_flags:
-            self.argparser.add_argument(
-                '-p', '--escapechar', dest='escapechar',
-                help='Character used to escape the delimiter if --quoting 3 ("quote none") is specified and to escape '
-                     'the QUOTECHAR if --no-doublequote is specified.')
-        if 'z' not in self.override_flags:
-            self.argparser.add_argument(
-                '-z', '--maxfieldsize', dest='field_size_limit', type=int,
-                help='Maximum length of a single field in the input CSV file.')
-        if 'e' not in self.override_flags:
-            self.argparser.add_argument(
-                '-e', '--encoding', dest='encoding', default=os.getenv('PYTHONIOENCODING', 'utf-8-sig'),
-                help='Specify the encoding of the input CSV file.')
-        if 'L' not in self.override_flags:
-            self.argparser.add_argument(
-                '-L', '--locale', dest='locale', default='en_US',
-                help='Specify the locale (en_US) of any formatted numbers.')
-        if 'S' not in self.override_flags:
-            self.argparser.add_argument(
-                '-S', '--skipinitialspace', dest='skipinitialspace', action='store_true',
-                help='Ignore whitespace immediately following the delimiter.')
-        if 'I' not in self.override_flags:
-            self.argparser.add_argument(
-                '--blanks', dest='blanks', action='store_true',
-                help='Do not convert "", "na", "n/a", "none", "null", "." to NULL.')
-            self.argparser.add_argument(
-                '--null-value', dest='null_values', nargs='+', default=[],
-                help='Convert this value to NULL. --null-value can be specified multiple times.')
-            self.argparser.add_argument(
-                '--date-format', dest='date_format',
-                help='Specify a strptime date format string like "%%m/%%d/%%Y".')
-            self.argparser.add_argument(
-                '--datetime-format', dest='datetime_format',
-                help='Specify a strptime datetime format string like "%%m/%%d/%%Y %%I:%%M %%p".')
-            self.argparser.add_argument(
-                '--no-leading-zeroes', dest='no_leading_zeroes', action='store_true',
-                help='Do not convert a numeric value with leading zeroes to a number.')
-        if 'H' not in self.override_flags:
-            self.argparser.add_argument(
-                '-H', '--no-header-row', dest='no_header_row', action='store_true',
-                help='Specify that the input CSV file has no header row. Will create default headers (a,b,c,...).')
-        if 'K' not in self.override_flags:
-            self.argparser.add_argument(
-                '-K', '--skip-lines', dest='skip_lines', type=int, default=0,
-                help='Specify the number of initial lines to skip before the header row (e.g. comments, copyright '
-                     'notices, empty rows).')
-        if 'v' not in self.override_flags:
-            self.argparser.add_argument(
-                '-v', '--verbose', dest='verbose', action='store_true',
-                help='Print detailed tracebacks when errors occur.')
-
-        # Output
-        if 'l' not in self.override_flags:
-            self.argparser.add_argument(
-                '-l', '--linenumbers', dest='line_numbers', action='store_true',
-                help='Insert a column of line numbers at the front of the output. Useful when piping to grep or as a '
-                     'simple primary key.')
-        if 'add-bom' not in self.override_flags:
-            self.argparser.add_argument(
-                '--add-bom', dest='add_bom', action='store_true',
-                help='Add the UTF-8 byte-order mark (BOM) to the output, for Excel compatibility')
-
-        # Input/Output
-        if 'zero' not in self.override_flags:
-            self.argparser.add_argument(
-                '--zero', dest='zero_based', action='store_true',
-                help='When interpreting or displaying column numbers, use zero-based numbering instead of the default '
-                     '1-based numbering.')
-
-        self.argparser.add_argument(
-            '-V', '--version', action='version', version='%(prog)s 2.2.0',
-            help='Display version information and exit.')
+        pass
 
     def _open_input_file(self, path, opened=False):
         """
@@ -297,57 +194,19 @@ class CSVKitUtility:
         """
         Extracts those from the command-line arguments those would should be passed through to the input CSV reader(s).
         """
-        kwargs = {}
-
-        field_size_limit = getattr(self.args, 'field_size_limit')
-        if field_size_limit is not None:
-            csv.field_size_limit(field_size_limit)
-
-        if self.args.tabs:
-            kwargs['delimiter'] = '\t'
-        elif self.args.delimiter:
-            kwargs['delimiter'] = self.args.delimiter
-
-        for arg in ('quotechar', 'quoting', 'doublequote', 'escapechar', 'skipinitialspace'):
-            value = getattr(self.args, arg)
-            if value is not None:
-                kwargs[arg] = value
-
-        if getattr(self.args, 'no_header_row', None):
-            kwargs['header'] = not self.args.no_header_row
-
-        return kwargs
+        pass
 
     def _extract_csv_writer_kwargs(self):
         """
         Extracts those from the command-line arguments those would should be passed through to the output CSV writer.
         """
-        kwargs = {}
-
-        if getattr(self.args, 'line_numbers', None):
-            kwargs['line_numbers'] = True
-
-        return kwargs
+        pass
 
     def _install_exception_handler(self):
         """
         Installs a replacement for sys.excepthook, which handles pretty-printing uncaught exceptions.
         """
-        def handler(t, value, traceback):
-            if self.args.verbose:
-                sys.__excepthook__(t, value, traceback)
-            else:
-                # Special case handling for Unicode errors, which behave very strangely
-                # when cast with unicode()
-                if t == UnicodeDecodeError:
-                    sys.stderr.write(
-                        'Your file is not "%s" encoded. Please specify the correct encoding with the --encoding flag.'
-                        ' Use the -v flag to see the complete error.\n' % self.args.encoding
-                    )
-                else:
-                    sys.stderr.write(f'{t.__name__}: {str(value)}\n')
-
-        sys.excepthook = handler
+        pass
 
     def get_column_types(self):
         if getattr(self.args, 'blanks', None):
@@ -462,19 +321,11 @@ def isatty(f):
 
 
 def default_str_decimal(obj):
-    if isinstance(obj, (datetime.date, datetime.datetime)):
-        return obj.isoformat()
-    if isinstance(obj, decimal.Decimal):
-        return str(obj)
-    raise TypeError(f'{repr(obj)} is not JSON serializable')
+    pass
 
 
 def default_float_decimal(obj):
-    if isinstance(obj, datetime.timedelta):
-        return obj.total_seconds()
-    if isinstance(obj, decimal.Decimal):
-        return float(obj)
-    return default_str_decimal(obj)
+    pass
 
 
 def make_default_headers(n):
@@ -592,20 +443,4 @@ def parse_list(pairs):
 
 # Adapted from https://github.com/pallets/click/blame/main/src/click/utils.py
 def _expand_args(args):
-    out = []
-
-    for arg in args:
-        arg = os.path.expanduser(arg)
-        arg = os.path.expandvars(arg)
-
-        try:
-            matches = glob(arg, recursive=True)
-        except re.error:
-            matches = []
-
-        if matches:
-            out.extend(matches)
-        else:
-            out.append(arg)
-
-    return out
+    pass

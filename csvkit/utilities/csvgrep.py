@@ -15,28 +15,7 @@ class CSVGrep(CSVKitUtility):
     override_flags = ['L', 'I']
 
     def add_arguments(self):
-        self.argparser.add_argument(
-            '-n', '--names', dest='names_only', action='store_true',
-            help='Display column names and indices from the input CSV and exit.')
-        self.argparser.add_argument(
-            '-c', '--columns', dest='columns',
-            help='A comma-separated list of column indices, names or ranges to be searched, e.g. "1,id,3-5".')
-        self.argparser.add_argument(
-            '-m', '--match', dest="pattern", action='store',
-            help='A string to search for.')
-        self.argparser.add_argument(
-            '-r', '--regex', dest='regex', action='store',
-            help='A regular expression to match.')
-        self.argparser.add_argument(
-            '-f', '--file', dest='matchfile', type=FileType('r'), action='store',
-            help='A path to a file. For each row, if any line in the file (stripped of line separators) is an exact '
-                 'match of the cell value, the row matches.')
-        self.argparser.add_argument(
-            '-i', '--invert-match', dest='inverse', action='store_true',
-            help='Select non-matching rows, instead of matching rows.')
-        self.argparser.add_argument(
-            '-a', '--any-match', dest='any_match', action='store_true',
-            help='Select rows in which any column matches, instead of all columns.')
+        pass
 
     def main(self):
         if self.args.names_only:
@@ -67,7 +46,7 @@ class CSVGrep(CSVKitUtility):
             self.args.matchfile.close()
 
             def pattern(x):
-                return x in lines
+                pass
         else:
             pattern = self.args.pattern
 
